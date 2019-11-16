@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+enable -f /run/current-system/sw/lib/bash/sleep sleep
+
+watermark=$1
+
+for i in $(shuf "$2"); do
+	while true; do
+		task_count=$(count-youtube-tasks)
+		if [[ $task_count -lt $watermark ]]; then
+			break
+		fi
+		echo "Waiting for task count to go under $watermark, currently $task_count"
+		sleep 10
+	done
+	echo "Starting $i"
+	grab-youtube-channel "$i" 1000000
+	sleep 10
+	# Give other grab-from-file-under-watermark-youtube scripts with the same watermark a chance to win the race
+	sleep $[($RANDOM % 10)]
+done
