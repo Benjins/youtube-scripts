@@ -84,7 +84,7 @@ get-new() {
 		suffix=""
 	fi
 	tube-with-mtime "https://www.youtube.com/$type$user_or_chan_or_pl$suffix" 2>&1 | tee "$temp_log"
-	for i in $(seq 3); do
+	for i in $(seq 5); do
 		if grep -iqP "$COMPLAINT_REGEXP" "$temp_log"; then
 			echo
 			echo "Saw some problem, grabbing again..."
