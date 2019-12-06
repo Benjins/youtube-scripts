@@ -5,7 +5,7 @@ set -eu
 # Return exit code 0 is safe to start on a scaleway, else
 # non-0.
 
-max=11
+max=13
 min_disk=19000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	max=30
@@ -18,9 +18,9 @@ elif [[ $HOSTNAME = "parhdd1" ]]; then
 elif [[ $HOSTNAME = "parssd1" ]]; then
 	max=24
 elif [[ $HOSTNAME = "usassd"* ]]; then
-	max=22
+	max=25
 elif [[ $HOSTNAME = "spassd"* ]]; then
-	max=22
+	max=25
 fi
 
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
