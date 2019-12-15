@@ -5,7 +5,7 @@ export TERASTASH_CASSANDRA_HOST=finssd1.wg
 
 # Use -4 to stick with IPv4 because YouTube blocks a lot of IPv6 ranges https://github.com/rg3/youtube-dl/issues/5138
 youtube_dl_args=(\
-	--user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"
+	--user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"
 	--force-ipv4
 	--sleep-interval 0.5
 	--socket-timeout 20
