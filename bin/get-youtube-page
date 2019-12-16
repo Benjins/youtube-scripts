@@ -4,5 +4,13 @@ set -eu
 
 url=$1
 
+# Unset variables (alternative: curl --insecure) because youtube-irc-bot
+# with SSL IRC connection contaminates the environment with env vars that
+# break curl to https://www.youtube.com/:
+# +SSL_CERT_DIR=/etc/pki/tls/certs
+# +SSL_CERT_FILE=/etc/pki/tls/certs/ca-bundle.crt
+unset SSL_CERT_DIR
+unset SSL_CERT_FILE
+
 #exec curl -sL --proxy-insecure --proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" -- "$url"
 exec curl -sL --proxy-insecure -- "$url"
