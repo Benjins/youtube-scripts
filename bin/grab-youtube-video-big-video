@@ -22,4 +22,4 @@ last_resort_host=finhdd1
 tmux new -s "YouTube-$i" -x 512 -y 40 -d "
 (
 ssh -p 904 at@$last_resort_host '. ~/.zshrc && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
-sleep 5) 2>&1 | tee >(strip-youtube-dl-progress > $logdir/$date.single.log)"
+sleep 5) 2>&1 | tee $logdir/$date.single.log"

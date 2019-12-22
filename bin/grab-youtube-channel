@@ -50,4 +50,4 @@ ssh -p 904 at@$hosts[16]        '. ~/.zshrc && safe-to-start-get-new && mkdir -p
 ssh -p 904 at@$hosts[17]        '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$hosts[18]        '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$last_resort_host '. ~/.zshrc                          && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
-sleep 5) 2>&1 | tee >(strip-youtube-dl-progress > $logdir/$date.log)"
+sleep 5) 2>&1 | tee $logdir/$date.log"
