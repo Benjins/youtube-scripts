@@ -12,5 +12,15 @@ url=$1
 unset SSL_CERT_DIR
 unset SSL_CERT_FILE
 
-#exec curl -sL --proxy-insecure --proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" -- "$url"
-exec curl -sL --proxy-insecure -- "$url"
+#exec curl -sL --proxy-insecure -- "$url"
+
+temp_out="$(mktemp get-youtube-page.XXXXXXXXX)"
+
+for i in $(seq 1 6); do
+	proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
+	# Use --fail to get a non-0 exit status on 429/503 HTTP response
+	curl --fail --max-time 7 -sL --proxy-insecure --proxy "$proxy" -- "$url" > "$temp_out" && break || continue
+done
+
+cat "$temp_out"
+rm -f "$temp_out"
