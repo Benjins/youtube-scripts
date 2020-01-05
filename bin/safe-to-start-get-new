@@ -10,9 +10,7 @@ min_disk=19000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	max=30
 elif [[ $HOSTNAME = "finssd1" ]]; then
-	#max=44
-	# Artificially limited to reduce chance of getting banned by proxies
-	max=19
+	max=30
 elif [[ $HOSTNAME = "parhdd1" ]]; then
 	max=24
 elif [[ $HOSTNAME = "parssd1" ]]; then
