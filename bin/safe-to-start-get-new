@@ -6,19 +6,19 @@ set -eu
 # non-0.
 
 max=13
-min_disk=19000000
+min_disk=17000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	max=30
 elif [[ $HOSTNAME = "finssd1" ]]; then
-	max=30
+	max=33
 elif [[ $HOSTNAME = "parhdd1" ]]; then
 	max=24
 elif [[ $HOSTNAME = "parssd1" ]]; then
 	max=24
-elif [[ $HOSTNAME = "usassd"* ]]; then
-	max=25
-elif [[ $HOSTNAME = "spassd"* ]]; then
-	max=25
+elif [[ $HOSTNAME = "scale8" ]]; then
+	max=20
+elif [[ $HOSTNAME = "scale10" ]]; then
+	max=20
 fi
 
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
