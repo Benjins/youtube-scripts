@@ -62,7 +62,7 @@ rpick() {
 # a country list; 14UBUyF16Nk says "This video is not available"
 # Channels like https://www.youtube.com/user/uverworldSMEJ/videos
 # are completely geoblocked and show "Downloading 0 videos"
-COMPLAINT_REGEXP='(finished with exit status [1-9]| bailing out\.\.\.|your country|video is available in|video is not available|Downloading 0 videos|Connection reset by peer|node_modules/cassandra-driver|CalledProcessError|Connection refused|Remote end closed connection without response)'
+COMPLAINT_REGEXP='(finished with exit status [1-9]| bailing out\.\.\.|your country|video is available in|video is not available|Downloading 0 videos|Connection reset by peer|node_modules/cassandra-driver|CalledProcessError|Connection refused|Remote end closed connection without response|Not enough local disk)'
 
 retry-tube-with-mtime() {
 	temp_log="$(mktemp)"
