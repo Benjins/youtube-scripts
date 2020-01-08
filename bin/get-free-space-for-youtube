@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -eu -o pipefail
+
+# Prints how much free space is available for YouTube downloading and muxing, in kilobytes
+
+df -B1 /home/at/YouTube | grep / | sed -r 's/ +/ /g' | cut -f 4 -d ' '

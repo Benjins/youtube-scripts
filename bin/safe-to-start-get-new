@@ -2,11 +2,10 @@
 
 set -eu
 
-# Return exit code 0 is safe to start on a scaleway, else
-# non-0.
+# Return exit code 0 is safe to start, else non-0.
 
 max=13
-min_disk=17000000
+min_disk=10000000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	max=30
 elif [[ $HOSTNAME = "finssd1" ]]; then
@@ -25,5 +24,5 @@ fi
 [[ $(pgrep 'node'       | wc -l) -lt $max ]]
 
 mkdir -p /home/at/YouTube
-kb_disk_free=$(/run/current-system/sw/bin/df /home/at/YouTube | grep / | sed -r 's/ +/ /g' | cut -f 4 -d ' ')
+kb_disk_free=$(get-free-space-for-youtube)
 [[ $kb_disk_free -gt $min_disk ]]
