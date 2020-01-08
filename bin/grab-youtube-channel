@@ -41,5 +41,6 @@ ssh -p 904 at@$hosts[7]         '. ~/.zshrc && safe-to-start-get-new && mkdir -p
 ssh -p 904 at@$hosts[8]         '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$hosts[9]         '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$hosts[10]        '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[11]        '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$last_resort_host '. ~/.zshrc                          && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
 sleep 5) 2>&1 | tee $logdir/$date.log"
