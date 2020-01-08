@@ -36,7 +36,7 @@ tube-with-mtime() {
 		--proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" \
 		--exec archive-youtube-download \
 		"$youtube_dl_args[@]" \
-		--max-downloads=${MAX_VIDEOS:999999} "$@"
+		--max-downloads=${MAX_VIDEOS:-999999} "$@"
 	echo "youtube-dl finished with exit status $?"
 }
 tube-with-mtime-no-ts() {
