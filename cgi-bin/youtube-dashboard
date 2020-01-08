@@ -214,7 +214,7 @@ echo "
 
 <pre>"
 processes=$(ps a -o command)
-for i in scale{8..14} parhdd1 parssd1 finssd1 finhdd1; do
+for i in scale{8..15} parhdd1 parssd1 finssd1 finhdd1; do
 	count=$(echo -E $processes | grep -c -P "^ssh -p 904 at@$i " || true)
 	echo "$i\t$count"
 done
