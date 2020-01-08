@@ -94,12 +94,11 @@ get-new() {
 		fi
 	done
 
-	# Even though we have UC?????????????????????? or PL* above, we might still
-	# have a UC* or PL* username instead, so try again as a user if needed.
+	# We might have a PL* username, so try again as a user if needed.
 	if [[ "$type" != "user/" && (
 	"0" == $(grep -iq 'WARNING: Unable to download webpage: HTTP Error 404' "$temp_log"; echo $?) ||
 	"0" == $(grep -iq 'ERROR: Invalid parameters. Maybe URL is incorrect.' "$temp_log"; echo $?)) ]]; then
-		echo "Trying $user_or_chan_or_pl again as a user instead of a channel or playlist..."
+		echo "Trying $user_or_chan_or_pl again as a user instead of a playlist..."
 		get-new user/
 	fi
 	rm -f "$temp_log"
