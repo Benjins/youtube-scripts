@@ -32,12 +32,19 @@ tube-with-mtime() {
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
 	YOUTUBE_DL_RM_ALL_BEFORE_DL=1 \
 	YOUTUBE_DL_TERASTASH=1 \
-	youtube-dl --proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" --exec archive-youtube-download "$youtube_dl_args[@]" --max-downloads=${MAX_VIDEOS:-200} "$@"
+	youtube-dl \
+		--proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" \
+		--exec archive-youtube-download \
+		"$youtube_dl_args[@]" \
+		--max-downloads=${MAX_VIDEOS:999999} "$@"
 	echo "youtube-dl finished with exit status $?"
 }
 tube-with-mtime-no-ts() {
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
-	youtube-dl --proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" "$youtube_dl_args[@]" --max-downloads=${MAX_VIDEOS:-200} "$@"
+	youtube-dl \
+		--proxy "$(shuf -n 1 ~/.config/youtube-dl/proxies)" \
+		"$youtube_dl_args[@]" \
+		"$@"
 }
 alias tube='tube-with-mtime --no-mtime'
 
@@ -109,7 +116,8 @@ get-new() {
 alias ls=deleteme
 unalias ls
 ls() {
-	LC_COLLATE=C /run/current-system/sw/bin/ls --block-size=\'1 -A --color=always -F --time-style=long-iso "$@" | GREP_COLORS="mt=0;37" grep -E --color -- '^.........T[+ ].*|$'
+	LC_COLLATE=C /run/current-system/sw/bin/ls --block-size=\'1 -A --color=always -F --time-style=long-iso "$@" \
+		| GREP_COLORS="mt=0;37" grep -E --color -- '^.........T[+ ].*|$'
 }
 
 get-here() {
