@@ -13,7 +13,7 @@ youtube_dl_args=(\
 	--socket-timeout 20
 	-o "%(title)s-%(id)s.%(ext)s"
 	--continue
-	--retries 60
+	--retries 40
 	--write-info-json
 	--write-thumbnail
 	--write-annotations
