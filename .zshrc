@@ -6,7 +6,7 @@ export TERASTASH_CASSANDRA_HOST=finssd1.wg
 # Use --force-ipv4 to stick with IPv4 because YouTube blocks a lot of IPv6 ranges https://github.com/rg3/youtube-dl/issues/5138
 # Use --no-progress to avoid bottlenecking on tmux when running 300+ tasks
 youtube_dl_args=(\
-	--user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
+	--user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
 	--force-ipv4
 	--no-progress
 	--sleep-interval 0.5
