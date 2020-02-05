@@ -25,6 +25,11 @@ import socket
 import subprocess
 # Warning: do not import youtube_dl modules because it does a `ts ls -j` on import
 
+if 'http_proxy' in os.environ:
+	del os.environ['http_proxy']
+if 'https_proxy' in os.environ:
+	del os.environ['https_proxy']
+
 def statsd_counter_increment(name, value):
 	packet = name.encode() + b":" + str(value).encode() + b"|c"
 	sock   = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
