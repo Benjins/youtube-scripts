@@ -5,6 +5,9 @@ export TERASTASH_CASSANDRA_HOST=finssd1.wg
 
 # Use --force-ipv4 to stick with IPv4 because YouTube blocks a lot of IPv6 ranges https://github.com/rg3/youtube-dl/issues/5138
 # Use --no-progress to avoid bottlenecking on tmux when running 300+ tasks
+#
+# Prefer format 22 for 720p because it is faster to download than fragments
+# Prefer format 18 for 360p because it is faster to download than fragments
 youtube_dl_args=(\
 	--user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
 	--force-ipv4
@@ -18,7 +21,7 @@ youtube_dl_args=(\
 	--write-thumbnail
 	--write-annotations
 	--all-subs
-	-f 'bestvideo[ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best'
+	-f 'bestvideo[ext=webm][height>720]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>720]+bestaudio[ext=m4a]/22/bestvideo[ext=webm][height>360]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>360]+bestaudio[ext=m4a]/18/bestvideo[ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best'
 	--ignore-errors
 )
 
