@@ -33,17 +33,15 @@ tube-with-mtime() {
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
 	YOUTUBE_DL_RM_ALL_BEFORE_DL=1 \
 	YOUTUBE_DL_TERASTASH=1 \
-	https_proxy=$https_proxy youtube-dl \
-		--proxy "$https_proxy" \
+	youtube-dl \
 		--exec archive-youtube-download \
 		"$youtube_dl_args[@]" \
 		--max-downloads=${MAX_VIDEOS:-999999} "$@"
 	echo "youtube-dl finished with exit status $?"
 }
 tube-with-mtime-no-ts() {
-	https_proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
-	https_proxy=$https_proxy youtube-dl \
+	youtube-dl \
 		--proxy "$https_proxy" \
 		"$youtube_dl_args[@]" \
 		"$@"
