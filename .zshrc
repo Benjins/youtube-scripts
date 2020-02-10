@@ -21,7 +21,7 @@ youtube_dl_args=(\
 	--write-thumbnail
 	--write-annotations
 	--all-subs
-	-f 'bestvideo[ext=webm][height>720]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>720]+bestaudio[ext=m4a]/22/bestvideo[ext=webm][height>360]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>360]+bestaudio[ext=m4a]/18/bestvideo[ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best'
+	-f 'bestvideo[ext=webm][height>720]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>720]+bestaudio[ext=m4a]/bestvideo[ext=webm][height=720][fps>30]+bestaudio[ext=webm]/bestvideo[ext=mp4][height=720][fps>30]+bestaudio[ext=m4a]/22/bestvideo[ext=webm][height>360]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>360]+bestaudio[ext=m4a]/18/bestvideo[ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best'
 	--ignore-errors
 )
 
