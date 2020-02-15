@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 export PATH="$HOME/bin:$PATH"
-export TERASTASH_CASSANDRA_HOST=finssd1.wg
+export TERASTASH_CASSANDRA_HOST=gerssd1.wg
 
 # Use --force-ipv4 to stick with IPv4 because YouTube blocks a lot of IPv6 ranges https://github.com/rg3/youtube-dl/issues/5138
 # Use --no-progress to avoid bottlenecking on tmux when running 300+ tasks
