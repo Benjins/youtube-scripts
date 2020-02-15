@@ -11,17 +11,17 @@ if [[ $HOSTNAME = "finhdd1" ]]; then
 	min_disk=150000000000
 	max=43
 elif [[ $HOSTNAME = "finssd1" ]]; then
-	min_disk=13000000000
-	max=90
+	min_disk=12000000000
+	max=95
 elif [[ $HOSTNAME = "gerssd1" ]]; then
 	min_disk=13000000000
-	max=70
+	max=90
 elif [[ $HOSTNAME = "parhdd1" ]]; then
 	min_disk=150000000000
 	max=35
 elif [[ $HOSTNAME = "parssd1" ]]; then
 	min_disk=20000000000
-	max=50
+	max=45
 fi
 
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
