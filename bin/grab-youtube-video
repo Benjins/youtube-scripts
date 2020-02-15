@@ -15,13 +15,33 @@ logdir=/var/www/html/logs/dl/$i
 mkdir -p $logdir
 date=$(date --iso-8601=seconds | cut -d '+' -f 1 | sed 's/:/_/g')
 
-single_video_host=finssd1
+hosts=(scale8 scale10 scale12 scale13 scale14 scale16 scale17 scale18 scale19 scale20 scale21 scale22 parhdd1 parssd1 finhdd1 finssd1 gerssd1)
+# Shuffle the hosts
+# (@f) splits on newlines: https://unix.stackexchange.com/questions/29724
+hosts=("${(@f)$(echo "$hosts[@]" | sed -r 's/ /\n/g' | shuf)}")
+
+last_resort_host=finhdd1
 
 # The name of the session is a lock that prevents multiple downloaders from working
 # on the same folder.
-#
-# self-ssh here to get rid of pty, because otherwise nodejs 12.5.0/12.6.0 has a SIGTTOU hang on exit
 tmux new -s "YouTube-$i" -x 512 -y 40 -d "
 (
-ssh -p 904 at@$single_video_host '. ~/.zshrc && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
+ssh -p 904 at@$hosts[1]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[2]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[3]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[4]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[5]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[6]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[7]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[8]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[9]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[10] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[11] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[12] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[13] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[14] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[15] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[16] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[17] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$last_resort_host '. ~/.zshrc                   && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && retry-tube-with-mtime -- ${(q)url}; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
 sleep 5) 2>&1 | tee $logdir/$date.single.log"
