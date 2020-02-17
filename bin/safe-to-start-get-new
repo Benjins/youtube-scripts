@@ -5,7 +5,7 @@ set -eu
 # Return exit code 0 is safe to start, else non-0.
 
 # For 2GB RAM/20GB SSD DEV scaleways with EPYC CPU
-max=10
+max=13
 min_disk=8000000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	min_disk=150000000000
