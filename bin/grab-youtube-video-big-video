@@ -15,7 +15,7 @@ logdir=/var/www/html/logs/dl/$i
 mkdir -p $logdir
 date=$(date --iso-8601=seconds | cut -d '+' -f 1 | sed 's/:/_/g')
 
-last_resort_host=finhdd1
+last_resort_host=parhdd1
 
 # The name of the session is a lock that prevents multiple downloaders from working
 # on the same folder.
