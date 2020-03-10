@@ -17,15 +17,12 @@ unset SSL_CERT_FILE
 temp_out="$(mktemp get-youtube-page.XXXXXXXXX)"
 
 for i in $(seq 1 9); do
-	proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
 	# Use --fail to get a non-0 exit status on 429/503 HTTP response
 	# Use a cookie to get the disable_polymer=1 page
 	curl \
 		--fail \
 		--max-time 7 \
 		-sL \
-		--proxy-insecure \
-		--proxy "$proxy" \
 		--compressed \
 		--cookie "PREF=f1=50000000&f5=30&f6=8" \
 		-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0' \
