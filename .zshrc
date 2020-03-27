@@ -33,6 +33,10 @@ youtube-dl() {
 tube-with-mtime() {
 	echo "Running on $HOST"
 	https_proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
+	# These machines are banned from proxy network
+	if [[ $(hostname) = "finhdd1" || $(hostname) = "gerssd1" ]]; then
+		https_proxy=""
+	fi
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
 	YOUTUBE_DL_RM_ALL_BEFORE_DL=1 \
 	YOUTUBE_DL_TERASTASH=1 \
@@ -45,6 +49,10 @@ tube-with-mtime() {
 }
 tube-with-mtime-no-ts() {
 	https_proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
+	# These machines are banned from proxy network
+	if [[ $(hostname) = "finhdd1" || $(hostname) = "gerssd1" ]]; then
+		https_proxy=""
+	fi
 	YOUTUBE_DL_SKIP_LIVESTREAMS=1 \
 	youtube-dl \
 		--proxy "$https_proxy" \
