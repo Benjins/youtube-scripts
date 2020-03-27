@@ -5,12 +5,14 @@ set -eu
 # Return exit code 0 is safe to start, else non-0.
 
 # For 2GB RAM/20GB SSD DEV scaleways with EPYC CPU
-max=3
+max=9
 min_disk=8000000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	min_disk=150000000000
+	max=9
 elif [[ $HOSTNAME = "gerssd1" ]]; then
 	min_disk=13000000000
+	max=2
 fi
 
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
