@@ -12,6 +12,6 @@ fi
 
 sed -i -r "s/\"parents\": \[\".{19}\"\]/\"parents\": [\"$parent\"]/g" ~/.config/terastash/chunk-stores.json
 
-for i in scale8 scale10 scale14 scale16 scale17 scale18 scale19 scale20 finhdd1; do
+for i in finhdd1 scale{21..30}; do
 	rsync -a ~/.config/terastash/chunk-stores.json at@$i:.config/terastash/
 done

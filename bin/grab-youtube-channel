@@ -19,7 +19,7 @@ logdir=/var/www/html/logs/dl/$i
 mkdir -p $logdir
 date=$(date --iso-8601=seconds | cut -d '+' -f 1 | sed 's/:/_/g')
 
-hosts=(scale8 scale10 scale14 scale16 scale17 scale18 scale19 scale20 finhdd1 gerssd1)
+hosts=(finhdd1 gerssd1 scale{21..30})
 # Shuffle the hosts
 # (@f) splits on newlines: https://unix.stackexchange.com/questions/29724
 hosts=("${(@f)$(echo "$hosts[@]" | sed -r 's/ /\n/g' | shuf)}")
@@ -43,5 +43,7 @@ ssh -p 904 at@$hosts[7]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouT
 ssh -p 904 at@$hosts[8]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$hosts[9]  '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$hosts[10] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[11] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
+ssh -p 904 at@$hosts[12] '. ~/.zshrc && safe-to-start-get-new && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code' ||
 ssh -p 904 at@$last_resort_host '. ~/.zshrc                          && mkdir -p ~/YouTube/$i && cd ~/YouTube/$i && MAX_VIDEOS=$MAX_VIDEOS get-new; code=\$?; rm -rf ~/YouTube/$i; exit \$code';
 sleep 5) 2>&1 | tee $logdir/$date.log"
