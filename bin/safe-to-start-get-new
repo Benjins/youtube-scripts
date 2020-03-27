@@ -9,8 +9,6 @@ max=2
 min_disk=8000000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	min_disk=150000000000
-elif [[ $HOSTNAME = "finssd1" ]]; then
-	min_disk=120000000000
 elif [[ $HOSTNAME = "gerssd1" ]]; then
 	min_disk=13000000000
 fi

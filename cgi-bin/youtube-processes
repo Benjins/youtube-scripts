@@ -6,7 +6,7 @@ echo "Content-Type: text/html; charset=utf-8
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 "
 
-for i in scale{8..20} finssd1 finhdd1 gerssd1; do
+for i in scale8 scale10 scale14 scale16 scale17 scale18 scale19 scale20 finhdd1 gerssd1; do
 	echo $i
 	timeout 7s ssh at@$i "ps auxw | grep -P '[y]outube_dl'" 2>&1 | sed -r 's/ --proxy \S+ / /g'
 done
