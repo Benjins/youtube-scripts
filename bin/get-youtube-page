@@ -34,7 +34,7 @@ for i in $(seq 1 9); do
 		-H 'Cache-Control: no-cache'
 		-- "$url"
 	)
-	printf '%s\0' "${cmd[@]}" | ssh at@$machine 'xargs -0 env --' > "$temp_out" && break || continue
+	printf '%s\0' "${cmd[@]}" | timeout -k 40s 30s ssh at@$machine 'xargs -0 env --' > "$temp_out" && break || continue
 done
 
 cat "$temp_out"
