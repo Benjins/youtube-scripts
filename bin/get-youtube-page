@@ -12,30 +12,29 @@ url=$1
 unset SSL_CERT_DIR
 unset SSL_CERT_FILE
 
-#exec curl -sL --proxy-insecure -- "$url"
-
 temp_out="$(mktemp get-youtube-page.XXXXXXXXX)"
 
 for i in $(seq 1 9); do
-	proxy="$(shuf -n 1 ~/.config/youtube-dl/proxies)"
+	machine=$(echo scale{21..30} | tr ' ' '\n' | shuf | head -n 1)
 	# Use --fail to get a non-0 exit status on 429/503 HTTP response
 	# Use a cookie to get the disable_polymer=1 page
-	curl \
-		--fail \
-		--max-time 7 \
-		-sL \
-		--proxy-insecure \
-		--proxy "$proxy" \
-		--compressed \
-		--cookie "PREF=f1=50000000&f5=30&f6=8" \
-		-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0' \
-		-H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
-		-H 'Accept-Language: en-US,en;q=0.5' \
-		-H 'Connection: keep-alive' \
-		-H 'Upgrade-Insecure-Requests: 1' \
-		-H 'Pragma: no-cache' \
-		-H 'Cache-Control: no-cache' \
-		-- "$url" > "$temp_out" && break || continue
+	cmd=(
+		~/bin/curl-with-proxy
+		--fail
+		--max-time 7
+		-sL
+		--compressed
+		--cookie "PREF=f1=50000000&f5=30&f6=8"
+		-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0'
+		-H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+		-H 'Accept-Language: en-US,en;q=0.5'
+		-H 'Connection: keep-alive'
+		-H 'Upgrade-Insecure-Requests: 1'
+		-H 'Pragma: no-cache'
+		-H 'Cache-Control: no-cache'
+		-- "$url"
+	)
+	printf '%s\0' "${cmd[@]}" | ssh at@$machine 'xargs -0 env --' > "$temp_out" && break || continue
 done
 
 cat "$temp_out"
