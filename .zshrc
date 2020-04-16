@@ -12,7 +12,7 @@ youtube_dl_args=(\
 	--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"
 	--force-ipv4
 	--no-progress
-	--sleep-interval 0.5
+	--sleep-interval 60
 	--socket-timeout 20
 	-o "%(title)s-%(id)s.%(ext)s"
 	--continue
