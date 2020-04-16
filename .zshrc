@@ -13,7 +13,8 @@ youtube_dl_args=(\
 	--youtube-bypass-429
 	--force-ipv4
 	--no-progress
-	--sleep-interval 60
+	--sleep-interval 15
+	--max-sleep-interval 45
 	--socket-timeout 20
 	-o "%(title)s-%(id)s.%(ext)s"
 	--continue
