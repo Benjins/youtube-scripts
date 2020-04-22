@@ -10,7 +10,6 @@ export TERASTASH_CASSANDRA_HOST=gerssd1.wg
 # Prefer format 18 for 360p because it is faster to download than fragments
 youtube_dl_args=(\
 	--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"
-	--youtube-bypass-429
 	--force-ipv4
 	--no-progress
 	--sleep-interval 15
