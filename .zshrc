@@ -5,6 +5,7 @@ export TERASTASH_CASSANDRA_HOST=gerssd1.wg
 
 # Use --force-ipv4 to stick with IPv4 because YouTube blocks a lot of IPv6 ranges https://github.com/rg3/youtube-dl/issues/5138
 # Use --no-progress to avoid bottlenecking on tmux when running 300+ tasks
+# Use --rm-cache-dir to fix 403s on DASH segments https://old.reddit.com/r/youtubedl/comments/g3pgjk/what_is_filesystem_cache_files_caching_for/
 #
 # Prefer format 22 for 720p because it is faster to download than fragments
 # Prefer format 18 for 360p because it is faster to download than fragments
@@ -22,6 +23,7 @@ youtube_dl_args=(\
 	--write-thumbnail
 	--write-annotations
 	--all-subs
+	--rm-cache-dir
 	-f 'bestvideo[ext=webm][height>720]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>720]+bestaudio[ext=m4a]/bestvideo[ext=webm][height=720][fps>30]+bestaudio[ext=webm]/bestvideo[ext=mp4][height=720][fps>30]+bestaudio[ext=m4a]/22/bestvideo[ext=webm][height>360]+bestaudio[ext=webm]/bestvideo[ext=mp4][height>360]+bestaudio[ext=m4a]/18/bestvideo[ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best'
 	--ignore-errors
 )
