@@ -71,7 +71,7 @@ COMPLAINT_REGEXP='(finished with exit status [1-9]| bailing out\.\.\.|your count
 retry-tube-with-mtime() {
 	temp_log="$(mktemp)"
 	tube-with-mtime "$@" 2>&1 | tee "$temp_log"
-	for i in $(seq 5); do
+	for i in $(seq 2); do
 		if grep -iqP "$COMPLAINT_REGEXP" "$temp_log"; then
 			echo
 			echo "Saw some problem, grabbing again..."
