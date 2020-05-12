@@ -15,9 +15,20 @@ elif [[ $HOSTNAME = "gerssd1" ]]; then
 	max=2
 fi
 
+# TODO: cache for 1 hour
+is_banned() {
+	if [[ $(curl -s 'https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en' | fgrep -q 'Sorry for the interruption. We have been receiving a large volume of requests from your network'; echo $?) -eq 0 ]]; then
+		echo 1
+	else
+		echo 0
+	fi
+}
+
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
 [[ $(pgrep 'node'       | wc -l) -lt $max ]]
 
 mkdir -p /home/at/YouTube
 kb_disk_free=$(get-free-space-for-youtube)
 [[ $kb_disk_free -gt $min_disk ]]
+
+[[ $(is_banned) -eq 0 ]]
