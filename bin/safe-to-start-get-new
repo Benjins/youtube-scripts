@@ -17,7 +17,7 @@ fi
 
 # TODO: cache for 1 hour
 is_banned() {
-	if [[ $(curl --ipv4 -s 'https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en' | grep -P -q '(Sorry for the interruption. We have been receiving a large volume of requests from your network|https://www\.google\.com/sorry/index)'; echo $?) -eq 0 ]]; then
+	if [[ $(curl --ipv4 --user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45' -s 'https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en' | grep -P -q '(Sorry for the interruption. We have been receiving a large volume of requests from your network|https://www\.google\.com/sorry/index)'; echo $?) -eq 0 ]]; then
 		echo 1
 	else
 		echo 0
