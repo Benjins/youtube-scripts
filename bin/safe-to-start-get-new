@@ -15,9 +15,19 @@ elif [[ $HOSTNAME = "gerssd1" ]]; then
 	max=2
 fi
 
+watch_url='https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en&disable_polymer=1'
+playlist_url='https://www.youtube.com/playlist?list=UUO3bfz4KY6zGT5IOaFJuxpA&disable_polymer=1&q=EhAqAQT5ACsgEwAAAAAAAAABGKK2n_cFIhkA8aeDS8caHbdeDdbLNndFGljI3mOvo28RMgFy'
+
 # TODO: cache for 1 hour
 is_banned() {
-	if [[ $(curl --ipv4 --user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45' -s 'https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en' | grep -P -q '(Sorry for the interruption. We have been receiving a large volume of requests from your network|https://www\.google\.com/sorry/index)'; echo $?) -eq 0 ]]; then
+	url=$1
+	if [[ $(curl \
+			--ipv4 \
+			--user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45' \
+			-s \
+			"$url" |\
+			 grep -P -q '(Sorry for the interruption. We have been receiving a large volume of requests from your network|https://www\.google\.com/sorry/index)'; echo $?) -eq 0
+	]]; then
 		echo 1
 	else
 		echo 0
@@ -31,4 +41,5 @@ mkdir -p /home/at/YouTube
 kb_disk_free=$(get-free-space-for-youtube)
 [[ $kb_disk_free -gt $min_disk ]]
 
-[[ $(is_banned) -eq 0 ]]
+[[ $(is_banned "$watch_url") -eq 0 ]]
+[[ $(is_banned "$playlist_url") -eq 0 ]]
