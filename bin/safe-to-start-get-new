@@ -15,8 +15,8 @@ elif [[ $HOSTNAME = "gerssd1" ]]; then
 	max=2
 fi
 
-watch_url='https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en&disable_polymer=1'
-playlist_url='https://www.youtube.com/playlist?list=UUO3bfz4KY6zGT5IOaFJuxpA&disable_polymer=1&q=EhAqAQT5ACsgEwAAAAAAAAABGKK2n_cFIhkA8aeDS8caHbdeDdbLNndFGljI3mOvo28RMgFy'
+watch_url='https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en'
+playlist_url='https://www.youtube.com/playlist?list=UUO3bfz4KY6zGT5IOaFJuxpA&q=EhAqAQT5ACsgEwAAAAAAAAABGKK2n_cFIhkA8aeDS8caHbdeDdbLNndFGljI3mOvo28RMgFy'
 
 # TODO: cache for 1 hour
 is_banned() {
