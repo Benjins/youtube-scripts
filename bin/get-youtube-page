@@ -14,8 +14,7 @@ unset SSL_CERT_FILE
 
 temp_out="$(mktemp get-youtube-page.XXXXXXXXX)"
 
-for i in $(seq 1 9); do
-	machine=$(echo scale{21..30} | tr ' ' '\n' | shuf | head -n 1)
+for machine in finhdd1 gerssd1 scale21 scale22 scale23; do
 	# Use --fail to get a non-0 exit status on 429/503 HTTP response
 	# Use a cookie to get the disable_polymer=1 page
 	cmd=(
