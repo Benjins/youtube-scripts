@@ -5,34 +5,15 @@ set -eu
 # Return exit code 0 is safe to start, else non-0.
 
 # For 2GB RAM/20GB SSD DEV scaleways with EPYC CPU
-max=2
+max=7
 min_disk=8000000000
 if [[ $HOSTNAME = "finhdd1" ]]; then
 	min_disk=150000000000
-	max=2
+	max=12
 elif [[ $HOSTNAME = "gerssd1" ]]; then
-	min_disk=13000000000
-	max=2
+	min_disk=150000000000
+	max=15
 fi
-
-watch_url='https://www.youtube.com/watch?v=9bZkp7q19f0&hl=en'
-playlist_url='https://www.youtube.com/playlist?list=UUO3bfz4KY6zGT5IOaFJuxpA&q=EhAqAQT5ACsgEwAAAAAAAAABGKK2n_cFIhkA8aeDS8caHbdeDdbLNndFGljI3mOvo28RMgFy'
-
-# TODO: cache for 1 hour
-is_banned() {
-	url=$1
-	if [[ $(curl \
-			--ipv4 \
-			--user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45' \
-			-s \
-			"$url" |\
-			 grep -P -q '(Sorry for the interruption. We have been receiving a large volume of requests from your network|https://www\.google\.com/sorry/index)'; echo $?) -eq 0
-	]]; then
-		echo 1
-	else
-		echo 0
-	fi
-}
 
 [[ $(pgrep 'youtube-dl' | wc -l) -lt $max ]]
 [[ $(pgrep 'node'       | wc -l) -lt $max ]]
@@ -40,6 +21,3 @@ is_banned() {
 mkdir -p /home/at/YouTube
 kb_disk_free=$(get-free-space-for-youtube)
 [[ $kb_disk_free -gt $min_disk ]]
-
-[[ $(is_banned "$watch_url") -eq 0 ]]
-[[ $(is_banned "$playlist_url") -eq 0 ]]
