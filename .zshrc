@@ -9,7 +9,8 @@ export TERASTASH_CASSANDRA_HOST=gerssd1.wg
 #
 # Prefer format 22 for 720p because it is faster to download than fragments
 # Prefer format 18 for 360p because it is faster to download than fragments
-youtube_dl_args=(\
+youtube_dl_args=(
+	--proxy socks5://10.64.0.1:1080
 	--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.61"
 	--force-ipv4
 	--no-progress
